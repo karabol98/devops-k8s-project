@@ -45,16 +45,25 @@ The project deploys a Python Flask application connected to a Redis database for
 
 ## 📸 Proof of Implementation
 
+### ✅ "Infrastructure
+*(<img width="1399" height="330" alt="Στιγμιότυπο οθόνης 2025-12-03 130527" src="https://github.com/user-attachments/assets/6994f6ea-35e5-495a-8982-83526d9ed08a" />)*
+
 ### ✅ CI/CD Pipeline Success
 *(Drag & Drop το screenshot του GitHub Actions εδώ)*
 
 ### ✅ Application Live (Load Balancer)
-*(Drag & Drop το screenshot του Browser με το JSON εδώ)*
+*(<img width="902" height="182" alt="Στιγμιότυπο οθόνης 2025-12-03 130210" src="https://github.com/user-attachments/assets/1f53a1e7-0477-4ecb-8b38-3110055065ae" />)*
 
 ### ✅ Observability (Grafana Dashboard)
-*(Drag & Drop το screenshot της Grafana εδώ)*
+*(<img width="1361" height="815" alt="Στιγμιότυπο οθόνης 2025-12-03 141738" src="https://github.com/user-attachments/assets/87c488c0-d4ec-432d-88b0-4a32b2de131f" />)*
+
+*(<img width="1369" height="845" alt="Στιγμιότυπο οθόνης 2025-12-03 141719" src="https://github.com/user-attachments/assets/22b99c4f-02ca-4e23-86e0-06d898b6d483" />)*
+
+### ✅ Deployment Verification (Terminal)
+*(<img width="1369" height="672" alt="Στιγμιότυπο οθόνης 2025-12-03 141646" src="https://github.com/user-attachments/assets/38360f4b-a3cf-4250-b2bd-67d4981698e8" />)*
 
 ---
+
 
 ## 🚀 How to Reproduce
 
@@ -74,11 +83,12 @@ terraform apply --auto-approve
 helm repo add prometheus-community [https://prometheus-community.github.io/helm-charts](https://prometheus-community.github.io/helm-charts)
 helm install monitoring prometheus-community/kube-prometheus-stack
 
-Step 3: Access the App
+### Step 3: Access the App
+```bash
 The GitHub Actions pipeline will automatically deploy the app. Retrieve the URL:
 kubectl get svc my-devops-service
 
-🧹Cost Management (Teardown)
+## 🧹Cost Management (Teardown)
 
 To avoid AWS charges, the infrastructure is destroyed after use:
 cd terraform
