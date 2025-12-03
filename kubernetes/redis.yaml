@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine # Έτοιμο image από το Docker Hub
+        ports:
+        - containerPort: 6379
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-redis-service # Το όνομα που θα χρησιμοποιεί η Python για να το βρει
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

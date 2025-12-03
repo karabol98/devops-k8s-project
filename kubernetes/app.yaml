@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-devops-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-devops-app
+  template:
+    metadata:
+      labels:
+        app: my-devops-app
+    spec:
+      containers:
+      - name: my-devops-app
+        image: 173245267942.dkr.ecr.eu-central-1.amazonaws.com/my-devops-app-repo
+        ports:
+        - containerPort: 5000
+        # ▼ ▼ ▼ ΤΟ ΝΕΟ ΚΟΜΜΑΤΙ ▼ ▼ ▼
+        env:
+        - name: REDIS_HOST
+          value: "my-redis-service"
+        # ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+
+---
+# Το Service μένει ίδιο...
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-devops-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-devops-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
